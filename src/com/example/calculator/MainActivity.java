@@ -116,7 +116,7 @@ public class MainActivity extends Activity {
 					newdigital = false;
 				}return;
 		}
-		if(s==null){
+		if(!s.equals("")){
 			if(btn.getId()==R.id.zhenfu)//改变数的正负性
 			{ 
 	//			c=Double.parseDouble(s);

@@ -11,10 +11,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-	private int option = 0;//运算符状态
-	private boolean newdigital=true;//标记是否是新输入的数字
-	private double a=0,b=0;//两个相加的数
-	private double c;//表示取正负
+	//Fixed the Force Close Bug
+	private int option = 0;
+	private boolean newdigital=true;
+	private double a=0,b=0;
+	private double c;
 	private Button button1;
 	private Button button2;
 	private Button button3;
@@ -115,14 +116,64 @@ public class MainActivity extends Activity {
 					newdigital = false;
 				}return;
 		}
-		
-		if(btn.getId()==R.id.zhenfu)//改变数的正负性
-		{ 
-//			c=Double.parseDouble(s);
-//			text.setText(String.valueOf(-c));
-//			return;
-			if(s.length()==0)
-			{
+		if(!s.equals("")){
+			if(btn.getId()==R.id.zhenfu)//改变数的正负性
+			{ 
+	//			c=Double.parseDouble(s);
+	//			text.setText(String.valueOf(-c));
+	//			return;
+				if(s.length()==0)
+				{
+					a=0;
+					b=0;
+					option=0;
+					newdigital=true;
+					text.setText("");
+					return;
+				}
+				else if(s!="")
+					{
+					c=Double.parseDouble(s);
+					text.setText(String.valueOf(-c));
+					newdigital=true;
+					return;
+					}	
+			}
+			
+			if(btn.getId()==R.id.jia)//加
+			{ 
+				a=Double.parseDouble(s);
+				option=1;
+				text.setText("");
+				return;
+			}
+			
+			if(btn.getId()==R.id.jian)//减
+			{ 
+				a=Double.parseDouble(s);
+				option=2;
+				text.setText("");
+				return;
+			}
+			
+			if(btn.getId()==R.id.chen)//乘
+			{ 
+				a=Double.parseDouble(s);
+				option=3;
+				text.setText("");
+				return;
+			}
+			
+			if(btn.getId()==R.id.chu)//除
+			{ 
+				a=Double.parseDouble(s);
+				option=4;
+				text.setText("");
+				return;
+			}
+			
+			if(btn.getId()==R.id.qingchu)//清除
+			{ 
 				a=0;
 				b=0;
 				option=0;
@@ -130,187 +181,138 @@ public class MainActivity extends Activity {
 				text.setText("");
 				return;
 			}
-			else if(s!="")
+			if(btn.getId()==R.id.kaifang)//开方
+			{   
+				if(s.length()==0)
 				{
-				c=Double.parseDouble(s);
-				text.setText(String.valueOf(-c));
-				newdigital=true;
-				return;
-				}	
-		}
-		
-		if(btn.getId()==R.id.jia)//加
-		{ 
-			a=Double.parseDouble(s);
-			option=1;
-			text.setText("");
-			return;
-		}
-		
-		if(btn.getId()==R.id.jian)//减
-		{ 
-			a=Double.parseDouble(s);
-			option=2;
-			text.setText("");
-			return;
-		}
-		
-		if(btn.getId()==R.id.chen)//乘
-		{ 
-			a=Double.parseDouble(s);
-			option=3;
-			text.setText("");
-			return;
-		}
-		
-		if(btn.getId()==R.id.chu)//除
-		{ 
-			a=Double.parseDouble(s);
-			option=4;
-			text.setText("");
-			return;
-		}
-		
-		if(btn.getId()==R.id.qingchu)//清除
-		{ 
-			a=0;
-			b=0;
-			option=0;
-			newdigital=true;
-			text.setText("");
-			return;
-		}
-		if(btn.getId()==R.id.kaifang)//开方
-		{   
-			if(s.length()==0)
-			{
-				a=0;
-				b=0;
-				option=0;
-				newdigital=true;
-				text.setText("");
-				return;
+					a=0;
+					b=0;
+					option=0;
+					newdigital=true;
+					text.setText("");
+					return;
+				}
+				else if(s!="")
+					{
+					double i=Double.parseDouble(s);
+					if(i>=0)
+					{
+						a=Math.sqrt(i);
+						text.setText(String.valueOf(a));
+						newdigital=true;
+						return;
+					}
+					else 
+					{
+						a=0;
+						b=0;
+						option=0;
+						newdigital=true;
+						text.setText("");
+						return;	
+					}
+					}
 			}
-			else if(s!="")
+			
+			if(btn.getId()==R.id.sin)//sin
+			{ 
+				if(s.length()==0)
 				{
-				double i=Double.parseDouble(s);
-				if(i>=0)
-				{
-					a=Math.sqrt(i);
+					a=0;
+					b=0;
+					option=0;
+					newdigital=true;
+					text.setText("");
+					return;
+				}
+				else if(s!="")
+					{
+					a=Math.sin(Double.parseDouble(s));
 					text.setText(String.valueOf(a));
 					newdigital=true;
 					return;
-				}
-				else 
-				{
-					a=0;
-					b=0;
-					option=0;
-					newdigital=true;
-					text.setText("");
-					return;	
-				}
-				}
-		}
-		
-		if(btn.getId()==R.id.sin)//sin
-		{ 
-			if(s.length()==0)
-			{
-				a=0;
-				b=0;
-				option=0;
-				newdigital=true;
-				text.setText("");
-				return;
-			}
-			else if(s!="")
-				{
-				a=Math.sin(Double.parseDouble(s));
-				text.setText(String.valueOf(a));
-				newdigital=true;
-				return;
-				}			
-		}
-		
-		if(btn.getId()==R.id.cos)//cos
-		{ 
-			if(s.length()==0)
-			{
-				a=0;
-				b=0;
-				option=0;
-				newdigital=true;
-				text.setText("");
-				return;
-			}
-			else if(s!="")
-				{
-				a=Math.cos(Double.parseDouble(s));
-				text.setText(String.valueOf(a));
-				newdigital=true;
-				return;
-				}	
-		}
-		
-		if(btn.getId()==R.id.zhishu)//指数
-		{ 
-				a = Double.parseDouble(s);
-				option = 5;
-				text.setText("");
-				return;
-		}
-		
-		if(btn.getId()==R.id.xiaoshudian)//小数点
-		{ 
-			if(s.indexOf(".")==-1)
-				if(s.trim().startsWith("0"))
-				{
-					text.setText("0.");
-					newdigital=true;
-				}
-				else
-				{
-					text.setText(s+".");
-					
-				}
-			return;
-		}
-		
-		if(btn.getId()==R.id.denyu)//等于号
-		{ 
-			b=Double.parseDouble(s);
-			switch(option)
-			{
-			case 1:
-				text.setText(String.valueOf(a+b));break;
-			case 2:
-				text.setText(String.valueOf(a-b));break;
-			case 3:
-				text.setText(String.valueOf(a*b));break;
-			case 4:
-			{
-				if(b!=0)
-					{text.setText(String.valueOf(a/b));}
-				else
-					{
-					Toast.makeText(MainActivity.this, "Can not divided by 0！", Toast.LENGTH_SHORT).show();
-					text.setText("");
-					a=0;
-					b=0;
-					option=0;
-					newdigital=true;
-					return;
-					}
-				break;
-			}
-			case 5:
-				text.setText(String.valueOf(Math.pow(a, b)));break;
-				
+					}			
 			}
 			
-			return;
-		}
+			if(btn.getId()==R.id.cos)//cos
+			{ 
+				if(s.length()==0)
+				{
+					a=0;
+					b=0;
+					option=0;
+					newdigital=true;
+					text.setText("");
+					return;
+				}
+				else if(s!="")
+					{
+					a=Math.cos(Double.parseDouble(s));
+					text.setText(String.valueOf(a));
+					newdigital=true;
+					return;
+					}	
+			}
+			
+			if(btn.getId()==R.id.zhishu)//指数
+			{ 
+					a = Double.parseDouble(s);
+					option = 5;
+					text.setText("");
+					return;
+			}
+			
+			if(btn.getId()==R.id.xiaoshudian)//小数点
+			{ 
+				if(s.indexOf(".")==-1)
+					if(s.trim().startsWith("0"))
+					{
+						text.setText("0.");
+						newdigital=true;
+					}
+					else
+					{
+						text.setText(s+".");
+						
+					}
+				return;
+			}
+			
+			if(btn.getId()==R.id.denyu)//等于号
+			{ 
+				b=Double.parseDouble(s);
+				switch(option)
+				{
+				case 1:
+					text.setText(String.valueOf(a+b));break;
+				case 2:
+					text.setText(String.valueOf(a-b));break;
+				case 3:
+					text.setText(String.valueOf(a*b));break;
+				case 4:
+				{
+					if(b!=0)
+						{text.setText(String.valueOf(a/b));}
+					else
+						{
+						Toast.makeText(MainActivity.this, "Can not divided by 0！", Toast.LENGTH_SHORT).show();
+						text.setText("");
+						a=0;
+						b=0;
+						option=0;
+						newdigital=true;
+						return;
+						}
+					break;
+				}
+				case 5:
+					text.setText(String.valueOf(Math.pow(a, b)));break;
+					
+				}
+				
+				return;
+			}
+		}	
 		}
 		  
 	  };
